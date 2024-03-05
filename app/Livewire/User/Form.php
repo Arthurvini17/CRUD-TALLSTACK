@@ -8,7 +8,11 @@ use Livewire\Component;
 class Form extends Component
 {
 
+
+    public $isOpen = false;
+
   
+
     public function render()
     {
         return view('livewire.user.form');
