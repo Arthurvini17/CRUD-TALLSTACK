@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Livewire\User\Update;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
+Route::post('/user/{id}', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 
 // Route::view('/create-user', 'user-create')->name('create.user');

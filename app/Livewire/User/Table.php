@@ -11,6 +11,15 @@ use Livewire\Component;
 class Table extends Component
 {
 
+    public $userId;
+
+    public $search = '';
+    public $name;
+
+    public $email;
+   
+
+    public $date;
 
     public $isOpen = false;
 
@@ -25,14 +34,14 @@ class Table extends Component
     }
 
 
-    public $name;
+    
 
-    public $email;
-   
-
-    public $date;
-
-
+    public function edit($userId) {
+        $user = User::find($userId);
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->date = $user->date;
+    }
  
     public function save()
     {
@@ -53,9 +62,17 @@ class Table extends Component
         User::create($validateDate);
     }
 
+    public function delete($id) {
+        $user = User::find($id)->delete();
+        session()->flash('message', 'User Excluído com sucesso!');
+    }
+    
+
     public function render()
     {
-        $users = User::all();
-        return view('livewire.user.table', ['users' => $users]);
+        $users = User::where('name', 'like', '%' . $this->search . '%')
+        ->orWhere('email', 'like', '%' . $this->search . '%')
+        ->get();
+        return view('livewire.user.table', ['users' => $users, ]);
     }
 }
