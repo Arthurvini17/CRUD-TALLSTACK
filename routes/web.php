@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Livewire\User\Update;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+Route::post('/register', [RegisterController::class, 'create'])->name('register.create');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login.index');
 Route::post('/user/{id}', [UserController::class, 'update'])->name('user.update');
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 

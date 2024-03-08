@@ -7,6 +7,14 @@ export default {
   ],
   theme: {
     extend: {},
+    // width:{
+    //   '100' : '20rem',
+    //   '128' : '32rem',
+    // },
+    // height: {
+    //   '100' : '20rem',
+    //   '128' : '32rem',
+    // }
   },
   plugins: [],
 }
