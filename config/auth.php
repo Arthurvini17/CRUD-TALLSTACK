@@ -38,7 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'funcionarios',
+        ],
+    
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'funcionarios',
         ],
     ],
 
@@ -58,18 +63,23 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
     'providers' => [
-        'users' => [
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        // ],
+    
+        'funcionarios' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Funcionarios::class,
         ],
+    ],
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-    ],
+
 
     /*
     |--------------------------------------------------------------------------

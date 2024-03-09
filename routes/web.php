@@ -25,6 +25,7 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register.in
 Route::post('/register', [RegisterController::class, 'create'])->name('register.create');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::post('/user/{id}', [UserController::class, 'update'])->name('user.update');
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 

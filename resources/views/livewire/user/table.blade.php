@@ -3,13 +3,18 @@
         <nav class="flex items-center justify-between">
             <div>
                 <h1 class="text-lg font-semibold">CRUD</h1>
+                @auth
+                   <p>Olá, {{Auth::user()->name}}</p>
+                @endauth
             </div>
 
             <div class="flex items-center gap-3">
                 <a href="{{ route('login.index') }}">
                     <p class="text-sm">Login</p>
                 </a>
-                <p class="text-sm">Register</p>
+                <a href="{{route('register.index')}}">
+                    <p class="text-sm">Register</p>
+                </a>
             </div>
         </nav>
     </header>
