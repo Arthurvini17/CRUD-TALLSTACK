@@ -1,20 +1,37 @@
 <div>
     <header class="bg-gray-400 p-4 fixed top-0 left-0 right-0 z-50">
         <nav class="flex items-center justify-between">
-            <div>
-                <h1 class="text-lg font-semibold">CRUD</h1>
-                @auth
-                   <p>Olá, {{Auth::user()->name}}</p>
-                @endauth
+            <div class="flex items-start gap-2">
+                <div>
+                    <h1 class="text-lg font-semibold">CRUD</h1>
+                </div>
+                <div>
+                    @guest
+                        <p class="text-lg font-semibold underline">Você não esta logado</p>
+                    @endguest
+
+                    @auth
+                        <p class="text-lg font-semibold">Olá, {{ Auth::user()->name }}</p>
+                    @endauth
+                </div>
             </div>
+
+
 
             <div class="flex items-center gap-3">
                 <a href="{{ route('login.index') }}">
-                    <p class="text-sm">Login</p>
+                    <p class="text-lg font-semibold">Login</p>
                 </a>
-                <a href="{{route('register.index')}}">
-                    <p class="text-sm">Register</p>
+                <a href="{{ route('register.index') }}">
+                    <p class="text-lg font-semibold">Register</p>
                 </a>
+
+                @auth
+                <form action="{{ route('logout.index') }}" method="POST">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
+                @endauth
             </div>
         </nav>
     </header>
@@ -39,6 +56,8 @@
             @if ($search)
                 <p>Procurando por: {{ $search }}</p>
             @endif
+
+            
         </div>
     </div>
 
@@ -55,16 +74,16 @@
             </thead>
 
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($funcionarios as $funcionario)
                     <tr>
-                        <td class="border px-4 py-2">{{ $user->name }}</td>
-                        <td class="border px-4 py-2">{{ $user->email }}</td>
-                        <td class="border px-4 py-2">{{ $user->date }}</td>
+                        <td class="border px-4 py-2">{{ $funcionario->name }}</td>
+                        <td class="border px-4 py-2">{{ $funcionario->email }}</td>
+                        <td class="border px-4 py-2">{{ $funcionario->date }}</td>
                         <td class="border px-4 py-2 items-center flex justify-center gap-1">
-                            <button wire:click='delete({{ $user->id }})'
+                            <button wire:click='delete({{ $funcionario->id }})'
                                 wire:confirm='Tem certeza que deseja excluir?'
                                 class="bg-red-700 text-white px-2 py-1">Excluir</button>
-                            <a href="{{ route('user.edit', ['id' => $user->id]) }}"
+                            <a href="{{ route('user.edit', ['id' => $funcionario->id]) }}"
                                 class="bg-emerald-700 text-white px-2 py-1">Edit</a>
                         </td>
                     </tr>

@@ -30,7 +30,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials, $remember)){
             $request->session()->regenerate();
-            return redirect()->view('welcome');
+            return redirect('/');
         } else {
             dd($credentials);
             return redirect()->back()->withInput()->withErrors(['password' => 'senha errada']);

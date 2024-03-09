@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Funcionarios;
+use App\Models\User;
 use App\Rules\MaiorDeIdade;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class RegisterController extends Controller
             'password.min' => 'A senha deve ter pelo menos :min caracteres.',
         ]);
     
-        Funcionarios::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'date' => $request->date,

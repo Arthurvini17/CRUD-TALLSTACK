@@ -2,9 +2,11 @@
 
 namespace App\Livewire\User;
 
+use App\Models\Funcionarios;
 use App\Models\User;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -36,11 +38,11 @@ class Table extends Component
 
     
 
-    public function edit($userId) {
-        $user = User::find($userId);
-        $this->name = $user->name;
-        $this->email = $user->email;
-        $this->date = $user->date;
+    public function edit($funcionarioId) {
+        $funcionario = Funcionarios::find($funcionarioId);
+        $this->name = $funcionario->name;
+        $this->email = $funcionario->email;
+        $this->date = $funcionario->date;
     }
  
     public function save()
@@ -59,20 +61,22 @@ class Table extends Component
             'date.date' => 'Você deve selecionar uma data válida.',
         ]);
 
-        User::create($validateDate);
+        Funcionarios::create($validateDate);
     }
 
     public function delete($id) {
-        $user = User::find($id)->delete();
+        $funcionario = Funcionarios::find($id)->delete();
         session()->flash('message', 'User Excluído com sucesso!');
     }
     
+ 
+
 
     public function render()
     {
-        $users = User::where('name', 'like', '%' . $this->search . '%')
+        $funcionarios = Funcionarios::where('name', 'like', '%' . $this->search . '%')
         ->orWhere('email', 'like', '%' . $this->search . '%')
         ->get();
-        return view('livewire.user.table', ['users' => $users, ]);
+        return view('livewire.user.table', ['funcionarios' => $funcionarios ]);
     }
 }
