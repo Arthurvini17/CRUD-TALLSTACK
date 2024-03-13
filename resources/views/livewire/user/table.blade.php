@@ -1,4 +1,6 @@
 <div>
+    <meta charset="UTF-8">
+
     <header class="bg-gray-400 p-4 fixed top-0 left-0 right-0 z-50">
         <nav class="flex items-center justify-between">
             <div class="flex items-start gap-2">
@@ -27,10 +29,10 @@
                 </a>
 
                 @auth
-                <form action="{{ route('logout.index') }}" method="POST">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
+                    <form action="{{ route('logout.index') }}" method="POST">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
                 @endauth
             </div>
         </nav>
@@ -57,7 +59,14 @@
                 <p>Procurando por: {{ $search }}</p>
             @endif
 
-            
+            <a href="{{ route('gerar-pdf') }}">
+                <button>Gerar pdf</button>
+            </a>
+
+            <div>
+                <button wire:click="gerarPdf">Gerar PDF</button>
+            </div>
+
         </div>
     </div>
 
@@ -78,7 +87,9 @@
                     <tr>
                         <td class="border px-4 py-2">{{ $funcionario->name }}</td>
                         <td class="border px-4 py-2">{{ $funcionario->email }}</td>
-                        <td class="border px-4 py-2">{{ $funcionario->date }}</td>
+                        <td class="border px-4 py-2">
+                            {{ \Carbon\Carbon::parse($funcionario->date)->tz('America/Sao_Paulo')->format('d/m/Y') }}
+                        </td>
                         <td class="border px-4 py-2 items-center flex justify-center gap-1">
                             <button wire:click='delete({{ $funcionario->id }})'
                                 wire:confirm='Tem certeza que deseja excluir?'
@@ -90,5 +101,6 @@
                 @endforeach
             </tbody>
         </table>
+
     </div>
 </div>

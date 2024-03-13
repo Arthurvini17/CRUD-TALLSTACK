@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Funcionarios;
 use App\Models\User;
 use App\Rules\MaiorDeIdade;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+
+   public $search = '';
     public function  index()
     {
         return view('register');
@@ -32,7 +35,7 @@ class RegisterController extends Controller
             'password.required' => 'O campo senha é obrigatório.',
             'password.min' => 'A senha deve ter pelo menos :min caracteres.',
         ]);
-    
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -42,5 +45,19 @@ class RegisterController extends Controller
 
         return redirect('/');
     }
-    
+
+
+    public function gerarPdf()
+    {
+        $funcionarios = Funcionarios::where('name', 'like', '%' . $this->search . '%')
+        ->orWhere('email', 'like', '%' . $this->search . '%')
+        ->get();
+
+
+        $funcionarios = Funcionarios::orderByDesc('created_at')->get();
+       $pdf =  \Barryvdh\DomPDF\Facade\Pdf::loadView('gerar-pdf', ['funcionarios' => $funcionarios])->setPaper('a4', 'landscape');
+
+       return $pdf->download('listar_funcionarios.pdf');
+        // return view('gerar-pdf');
+    }
 }

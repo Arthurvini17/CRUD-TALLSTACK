@@ -33,4 +33,7 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout.index'
 Route::post('/user/{id}', [UserController::class, 'update'])->name('user.update');
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 
+
+Route::get('/gerar-pdf', [RegisterController::class, 'gerarPdf'])->name('gerar-pdf');
+
 // Route::view('/create-user', 'user-create')->name('create.user');

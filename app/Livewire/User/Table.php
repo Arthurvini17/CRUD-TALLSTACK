@@ -4,6 +4,7 @@ namespace App\Livewire\User;
 
 use App\Models\Funcionarios;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Auth;
@@ -70,7 +71,19 @@ class Table extends Component
     }
     
  
+    public function gerarPdf()
+    {
+        // $funcionarios = Funcionarios::where('name', 'like', '%' . $this->search . '%')
+        // ->orWhere('email', 'like', '%' . $this->search . '%')
+        // ->get();
 
+
+        $funcionarios = Funcionarios::orderByDesc('created_at')->get();
+        
+       $pdf =  Pdf::loadView('gerar-pdf', ['funcionarios' => $funcionarios])->setPaper('a4', 'landscape');
+
+       return $pdf->download('listar_funcionarios.pdf');
+    }
 
     public function render()
     {

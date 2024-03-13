@@ -25,16 +25,15 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
-        $remember = $request->has('remeber');
-
+    
+        $remember = $request->filled('remember'); 
+    
         if(Auth::attempt($credentials, $remember)){
             $request->session()->regenerate();
+    
             return redirect('/');
         } else {
-            dd($credentials);
-            return redirect()->back()->withInput()->withErrors(['password' => 'senha errada']);
+            return redirect()->back()->withInput()->withErrors(['email' => 'As credenciais fornecidas não correspondem aos nossos registros.']);
         }
-
     }
 }
