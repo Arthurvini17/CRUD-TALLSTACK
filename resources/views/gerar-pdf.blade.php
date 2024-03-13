@@ -11,7 +11,7 @@
 
     <h2>Usuarios</h2>
 
-    <table style="border-collapsse: collapse; width:100%">
+    <table style="border-collapse: collapse; width:100%">
         <thead>
             <tr style="border-collapse: collapse; width: 100%"">
                 <th style="background-color:  #adb5bd">ID</th>

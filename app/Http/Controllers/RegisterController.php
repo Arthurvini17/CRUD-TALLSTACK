@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Funcionarios;
 use App\Models\User;
 use App\Rules\MaiorDeIdade;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
@@ -47,17 +47,15 @@ class RegisterController extends Controller
     }
 
 
-    public function gerarPdf()
+    public function gerarPdf($id)
     {
-        $funcionarios = Funcionarios::where('name', 'like', '%' . $this->search . '%')
-        ->orWhere('email', 'like', '%' . $this->search . '%')
-        ->get();
-
-
-        $funcionarios = Funcionarios::orderByDesc('created_at')->get();
-       $pdf =  \Barryvdh\DomPDF\Facade\Pdf::loadView('gerar-pdf', ['funcionarios' => $funcionarios])->setPaper('a4', 'landscape');
-
-       return $pdf->download('listar_funcionarios.pdf');
-        // return view('gerar-pdf');
+        // Busca o funcionário pelo id e retorna uma coleção com um único funcionário
+        $funcionarios = Funcionarios::where('id', $id)->get();
+    
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('gerar-pdf', ['funcionarios' => $funcionarios])->setPaper('a4', 'landscape');
+    
+        return $pdf->download('funcionario_' . $id . '.pdf');
     }
 }
+    
+

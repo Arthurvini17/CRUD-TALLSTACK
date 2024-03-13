@@ -58,23 +58,14 @@
             @if ($search)
                 <p>Procurando por: {{ $search }}</p>
             @endif
-
-            <a href="{{ route('gerar-pdf') }}">
-                <button>Gerar pdf</button>
-            </a>
-
-            <div>
-                <button wire:click="gerarPdf">Gerar PDF</button>
-            </div>
-
         </div>
     </div>
 
     <div class="flex flex-col">
-        <table class="table-fixed bg-gray-100 rounded-lg shadow-md">
+        <table class="table-fixed bg-gray-100 rounded-lg shadow-md border-collapse w-full">
 
             <thead>
-                <tr>
+                <tr class="border-collapse w-full">
                     <th class="px-4 py-2">Nome</th>
                     <th class="px-4 py-2">Email</th>
                     <th class="px-4 py-2">Data de Nascimento</th>
@@ -83,22 +74,30 @@
             </thead>
 
             <tbody>
-                @foreach ($funcionarios as $funcionario)
+                @forelse ($funcionarios as $funcionario)
                     <tr>
                         <td class="border px-4 py-2">{{ $funcionario->name }}</td>
-                        <td class="border px-4 py-2">{{ $funcionario->email }}</td>
-                        <td class="border px-4 py-2">
+                        <td class="border px-4 py-2 text-center">{{ $funcionario->email }}</td>
+                        <td class="border px-4 py-2 text-center">
                             {{ \Carbon\Carbon::parse($funcionario->date)->tz('America/Sao_Paulo')->format('d/m/Y') }}
                         </td>
                         <td class="border px-4 py-2 items-center flex justify-center gap-1">
                             <button wire:click='delete({{ $funcionario->id }})'
                                 wire:confirm='Tem certeza que deseja excluir?'
-                                class="bg-red-700 text-white px-2 py-1">Excluir</button>
+                                class="bg-red-700 text-white px-2 py-1 rounded-md ">Excluir</button>
                             <a href="{{ route('user.edit', ['id' => $funcionario->id]) }}"
-                                class="bg-emerald-700 text-white px-2 py-1">Edit</a>
+                                class="bg-emerald-700 text-white px-2 py-1 rounded-md">Edit</a>
+
+                            {{-- <button wire:click="gerarPdf({{$funcionario->id}})">Gerar PDF</button> --}}
+
+                            <a href="{{ route('gerar-pdf', ['id' => $funcionario->id]) }}">
+                                <button class="bg-orange-500 border rounded-md px-2 py-1">Gerar pdf</button>
+                            </a>
+
                         </td>
-                    </tr>
-                @endforeach
+                    @empty
+                        <td class="col-span-4">Nenhum usuario econtrado</td>
+                @endforelse
             </tbody>
         </table>
 

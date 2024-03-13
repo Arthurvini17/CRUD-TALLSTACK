@@ -22,8 +22,14 @@ class LoginController extends Controller
   
      public function authenticate(Request $request){
         $credentials = $request->validate([
+            'name' => ['required'],
             'email' => ['required', 'email'],
             'password' => ['required'],
+        ],[
+            'name.required' => 'Porfavor digite seu nome',
+            'email.required' => 'Porfavor Digite seu email',
+            'password.required' => 'Porfavor digite sua senha',
+            'password.min' => 'Senha muito curta'
         ]);
     
         $remember = $request->filled('remember'); 
