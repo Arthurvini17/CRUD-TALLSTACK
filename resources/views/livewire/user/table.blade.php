@@ -95,9 +95,13 @@
                             </a>
 
                         </td>
+
                     @empty
                         <td class="col-span-4">Nenhum usuario econtrado</td>
                 @endforelse
+                <div class="">
+                    {{ $funcionarios->links() }}
+
             </tbody>
         </table>
 

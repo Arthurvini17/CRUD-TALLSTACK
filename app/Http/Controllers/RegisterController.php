@@ -23,7 +23,7 @@ class RegisterController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:funcionarios',
-            'date' => ['required', 'date', new MaiorDeIdade],
+            'date' => ['required', 'date'],
             'password' => 'required|min:5',
         ], [
             'name.required' => 'O campo nome é obrigatório.',
