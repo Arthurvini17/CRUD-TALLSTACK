@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'name.required' => 'O campo nome é obrigatório.',
             'email.required' => 'O campo email é obrigatório.',
             'email.email' => 'O email deve ser válido.',
-            'email.unique' => 'Este email já está sendo usado por outro usuário.',
+            'email.unique:users' => 'Este email já está sendo usado por outro usuário.',
             'date.required' => 'O campo data de nascimento é obrigatório.',
             'date.date' => 'A data de nascimento deve ser uma data válida.',
             'password.required' => 'O campo senha é obrigatório.',

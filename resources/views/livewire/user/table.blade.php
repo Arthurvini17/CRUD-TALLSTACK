@@ -1,49 +1,13 @@
 <div>
-    <meta charset="UTF-8">
-
-    <header class="bg-gray-400 p-4 fixed top-0 left-0 right-0 z-50">
-        <nav class="flex items-center justify-between">
-            <div class="flex items-start gap-2">
-                <div>
-                    <h1 class="text-lg font-semibold">CRUD</h1>
-                </div>
-                <div>
-                    @guest
-                        <p class="text-lg font-semibold underline">Você não esta logado</p>
-                    @endguest
-
-                    @auth
-                        <p class="text-lg font-semibold">Olá, {{ Auth::user()->name }}</p>
-                    @endauth
-                </div>
-            </div>
-
-
-
-            <div class="flex items-center gap-3">
-                <a href="{{ route('login.index') }}">
-                    <p class="text-lg font-semibold">Login</p>
-                </a>
-                <a href="{{ route('register.index') }}">
-                    <p class="text-lg font-semibold">Register</p>
-                </a>
-
-                @auth
-                    <form action="{{ route('logout.index') }}" method="POST">
-                        @csrf
-                        <button type="submit">Logout</button>
-                    </form>
-                @endauth
-            </div>
-        </nav>
-    </header>
+    
+    
 
     <div class="mt-4">
         <button wire:click='abrirView' class="bg-indigo-600 mt-12 text-white rounded-sm py-2 px-4 mb-4">Criar
             usuário</button>
 
         @if ($isOpen)
-            <div>
+            <div wire:transition>
                 @include('livewire.user.form')
             </div>
         @endif
@@ -83,7 +47,6 @@
                         </td>
                         <td class="border px-4 py-2 items-center flex justify-center gap-1">
                             <button wire:click='delete({{ $funcionario->id }})'
-                                wire:confirm='Tem certeza que deseja excluir?'
                                 class="bg-red-700 text-white px-2 py-1 rounded-md ">Excluir</button>
                             <a href="{{ route('user.edit', ['id' => $funcionario->id]) }}"
                                 class="bg-emerald-700 text-white px-2 py-1 rounded-md">Edit</a>

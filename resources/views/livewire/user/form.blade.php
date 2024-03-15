@@ -1,5 +1,5 @@
 <div class=" absolute inset-0 flex justify-center items-center h-screen">
-    <div class="  bg-gray-500 w-[32rem] h-[32rem] border border-slate-900 rounded-lg shadow-lg p-8">
+    <div class="  bg-gray-500 w-[32rem] h-[32rem]  border-slate-900 rounded-lg shadow-lg p-8">
         <div class="flex items-center justify-center">
         <h1 class="text-2xl mb-4">Create a User</h1>
         </div>
@@ -7,7 +7,7 @@
         <form class="grid grid-cols-1 gap-4 " wire:submit.prevent="save">
             <div>
                 <label for="name" class="block">Name</label>
-                <input id="name" class="p-1 w-full border-gray-300 focus:border-sky-400 focus:ring focus:ring-sky-200" type="text" wire:model.lazy.blur="name">
+                <input id="name" class="p-1 w-full border-gray-300 rounded-md focus:border-sky-400 focus:ring focus:ring-sky-200" type="text" wire:model.lazy.blur="name">
                 @error('name') 
                 <span>{{$message}}</span>
                 @enderror

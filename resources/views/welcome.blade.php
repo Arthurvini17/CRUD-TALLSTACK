@@ -15,6 +15,7 @@
 
 <body>
     
+    @include('livewire.user.header')
     @livewire('user.table')
     @livewireScripts
 

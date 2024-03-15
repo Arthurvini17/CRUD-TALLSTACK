@@ -1,16 +1,16 @@
 <div class="h-screen  not-italic">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <form class="" action="{{ route('register.create') }}" method="POST">
+        @csrf
         <div class="flex items-center justify-center w-full h-full  gap-2">
             <div>
                 <img class="w-full hover" src="{{ asset('img/Login-cuate.svg') }}" alt="">
             </div>
             <div class="bg-gray-300 p-10 rounded-md shadow-lg flex-col">
-                @csrf
 
                 <div>
                     <label for="name">Name</label>
-                    <input class="border border-slate-950 p-1 w-full rounded-md" type="text" id="name"
+                    <input class="border border-slate-950 p-1 w-full rounded-md" type="text" name="name" id="name"
                         placeholder="Digite seu nome">
                     @error('name')
                         <span id="name">{{ $message }}</span>
@@ -19,7 +19,7 @@
 
                 <div>
                     <label for="email">Email</label>
-                    <input class="border border-slate-950 p-1 w-full rounded-md" type="email" id="email"
+                    <input class="border border-slate-950 p-1 w-full rounded-md" name="email" type="email" id="email"
                         placeholder="Digite seu email">
                     @error('email')
                         <span id="email">{{ $message }}</span>
@@ -28,7 +28,7 @@
 
                 <div>
                     <label for="password">Password</label>
-                    <input class="border border-slate-950 p-1 w-full rounded-md" type="password" id="password"
+                    <input class="border border-slate-950 p-1 w-full rounded-md" name="password" type="password" id="password"
                         placeholder="Digite sua senha">
                     @error('password')
                         <span id="password">{{ $message }}</span>
@@ -37,7 +37,7 @@
 
                 <div>
                     <label for="date">Data nascimento</label>
-                    <input class="border border-slate-950 p-1 w-full rounded-md" type="date" id="date"
+                    <input class="border border-slate-950 p-1 w-full rounded-md" name="date" type="date" id="date"
                         placeholder="data nascimento">
 
                     @error('date')

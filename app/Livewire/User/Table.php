@@ -50,8 +50,8 @@ class Table extends Component
         $this->isOpen = false;
     }
 
-    public function edit($funcionarioId) {
-        $funcionario = Funcionarios::find($funcionarioId);
+    public function edit($id) {
+        $funcionario = Funcionarios::find($id);
         $this->name = $funcionario->name;
         $this->email = $funcionario->email;
         $this->date = $funcionario->date;
@@ -67,6 +67,14 @@ class Table extends Component
             'date' => $validated['date'],
         ]);
     }
+
+    public function delete($id) {
+        Funcionarios::findOrFail($id)->delete();
+        session()->flash('message', 'User Excluído com sucesso!');
+    }
+
+
+
  
     // public function save()
     // {
@@ -89,10 +97,7 @@ class Table extends Component
 
    
 
-    public function delete($id) {
-        $funcionario = Funcionarios::find($id)->delete();
-        session()->flash('message', 'User Excluído com sucesso!');
-    }
+    
     
  
     public function gerarPdf($id)
