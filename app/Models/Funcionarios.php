@@ -11,7 +11,7 @@ class Funcionarios extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'date'
+        'name', 'email', 'password', 'date', 'cpf', 'endereco'
     ];
 
     protected $hidden = [

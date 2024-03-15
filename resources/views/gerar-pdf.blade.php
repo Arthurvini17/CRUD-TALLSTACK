@@ -18,6 +18,8 @@
                 <th style="background-color:  #adb5bd">Nome</th>
                 <th style="background-color:  #adb5bd">Email</th>
                 <th style="background-color:  #adb5bd">Data nascimento</th>
+                <th style="background-color:  #adb5bd" >CPF</th>
+                <th style="background-color:  #adb5bd">Endereço</th>
             </tr>
         </thead>
 
@@ -28,8 +30,9 @@
                     <td style="border: 1px solid #ccc; border-top:none">{{$funcionario->name}}</td>
                     <td style="border: 1px solid #ccc; border-top:none">{{$funcionario->email}}</td>
                     <td style="border: 1px solid #ccc; border-top:none">{{\Carbon\Carbon::parse($funcionario->date)->tz('America/Sao_Paulo')->format('d/m/Y')}}</td>
-
-
+                    <td style="border: 1px solid #ccc; border-top:none"">{{$funcionario->date}}</td>
+                    <td style="border: 1px solid #ccc; border-top:none"">{{$funcionario->cpf}}</td>
+                    <td style="border: 1px solid #ccc; border-top:none"">{{$funcionario->endereco}}</td>
                 </tr>
             @empty
             <tr>

@@ -1,11 +1,7 @@
 <div>
-    
-    
-
     <div class="mt-4">
-        <button wire:click='abrirView' class="bg-indigo-600 mt-12 text-white rounded-sm py-2 px-4 mb-4">Criar
+        <button wire:click='abrirView' class="bg-indigo-600 mt-12 text-white rounded-md border drop-shadow-md py-2 px-4 mb-4">Criar
             usuário</button>
-
         @if ($isOpen)
             <div wire:transition>
                 @include('livewire.user.form')
@@ -15,7 +11,7 @@
 
     <div class="flex items-end justify-end mr-2 mb-4 flex-col">
         <div class="flex items-center">
-            <input class="border-2 border-slate-300 rounded-md outline-none px-4 py-2" type="search"
+            <input class="border-2 border-slate-300 rounded-md outline-none px-4 py-2 hover:border-black ease-in duration-300" type="search"
                 wire:model.live='search' placeholder="Procurar...">
         </div>
         <div class="flex items-start justify-start">
@@ -60,7 +56,7 @@
                         </td>
 
                     @empty
-                        <td class="col-span-4">Nenhum usuario econtrado</td>
+                        <td class="col-span-4">Nenhum usuario no sistema</td>
                 @endforelse
                 <div class="">
                     {{ $funcionarios->links() }}

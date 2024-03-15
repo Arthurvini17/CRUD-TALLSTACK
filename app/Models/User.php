@@ -22,6 +22,9 @@ class User extends Authenticatable
         'email',
         'date',
         'password',
+        'endereco',
+        'cpf',
+
     ];
 
     /**
@@ -43,5 +46,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
 }

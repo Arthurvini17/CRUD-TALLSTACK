@@ -32,9 +32,15 @@ class Table extends Component
 
     public $email = '';
 
-    #[Validate('required|date')]
+    #[Validate('required', message: 'Selecione a data')]
     public $date = '';
     
+
+    #[Validate('required', message: 'Digite seu CPF')]
+    public $cpf = '';
+
+    #[Validate('required', message: 'Digite seu endereço')]
+    public $endereco = '';
     public $search = '';
   
 
@@ -55,6 +61,8 @@ class Table extends Component
         $this->name = $funcionario->name;
         $this->email = $funcionario->email;
         $this->date = $funcionario->date;
+        $this->cpf = $funcionario->cpf;
+        $this->endereco = $funcionario->endereco;
     }
 
 
@@ -65,6 +73,9 @@ class Table extends Component
             'name' => $validated['name'],
             'email' => $validated['email'],
             'date' => $validated['date'],
+            'cpf' => $validated['cpf'],
+            'endereco' => $validated['endereco'],
+
         ]);
     }
 
